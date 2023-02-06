@@ -1,32 +1,67 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view/>
   </div>
 </template>
+<script>
+  export default {
+    name:'app',
+    data(){
+      return{
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+      }
+    },
+    methods:{
+      keyFocus(){
+        sessionStorage.setItem('footer_name','footer_name')
+        //软键盘弹起
+        document.body.addEventListener('focusin',function () {
+          // console.log('弹起')
+          //获取导航栏的元素
+          let footer = document.getElementsByClassName('van-tabbar--fixed')[0]
+          //监听手机软键盘弹出 并隐藏底部导航栏
+          footer.style.display = 'none'
+        })
+        //软键盘关闭
+        document.body.addEventListener('focusout',function () {
+          // console.log('关闭')
+          //获取导航栏的元素
+          let footer = document.getElementsByClassName('van-tabbar--fixed')[0]
+          //监听手机软键盘关闭 并显示出导航栏
+          footer.style.display = 'flex'
+        })
+      }
+    },
+    created() {
+      this.keyFocus()
+    },
   }
-}
+</script>
+<style>
+  .iconfont{
+    font-size: 22px!important;
+    display: block;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+  img{
+    width: 100%;
+    height: 100%;
+  }
+/*  @font-face {
+    font-family: 'public_font';
+    src: url("assets/font/Captureit.ttf");
+  }
+  *{
+    font-family: 'public_font';
+  }*/
+  p{
+    margin: 0 ;
+    padding: 0;
+  }
+  .icon{
+    font-style: normal;
+    font-weight: 600;
+  }
+
 </style>
